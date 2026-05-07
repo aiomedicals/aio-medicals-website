@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AIO Medicals | Private Blood Tests</title>
+    <meta
+      name="description"
+      content="AIO Medicals provides private blood tests, phlebotomy appointments, health screening panels and clear results support."
+    >
+    <link rel="preload" href="assets/clinic-hero.png" as="image">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="AIO Medicals home">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="assets/aio-medicals-logo.png" alt="">
+        </span>
+        <span class="brand-tagline">Private blood testing clinic</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <div class="nav-dropdown blood-tests-menu">
+          <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="blood-tests-menu-panel">
+            Blood tests
+          </button>
+          <div id="blood-tests-menu-panel" class="blood-tests-panel" hidden></div>
+        </div>
+        <a href="#pathway">How it works</a>
+        <a href="#locations">Locations</a>
+        <a href="#trust">Trust</a>
+        <a href="#faq">FAQs</a>
+        <a class="nav-cta" href="#booking">Book</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <img class="hero-image" src="assets/clinic-hero.png" alt="Clinician preparing blood sample tubes in a clean private clinic room">
+        <div class="hero-scrim" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Private blood testing with clinical care</p>
+          <h1>A calmer way to get the blood tests you need.</h1>
+          <p class="hero-copy">
+            AIO Medicals helps patients book private blood tests, phlebotomy appointments and targeted health screens with a professional clinic team.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="https://calendly.com/aiomedicals" target="_blank" rel="noreferrer">Book an appointment</a>
+            <a class="button secondary" href="https://calendly.com/aiomedicals/30min?back=1&amp;month=2026-05" target="_blank" rel="noreferrer">Book an on-line consultation</a>
+            <a class="button secondary" href="tests/index.html">View blood tests</a>
+          </div>
+          <p class="hero-action-note">Both consultation appointments are 30 minutes and cost £10.</p>
+          <dl class="hero-metrics" aria-label="Service highlights">
+            <div>
+              <dt>Fast</dt>
+              <dd>Appointments designed around short visits</dd>
+            </div>
+            <div>
+              <dt>Clear</dt>
+              <dd>Test information explained before booking</dd>
+            </div>
+            <div>
+              <dt>Private</dt>
+              <dd>Discreet clinic-led blood collection</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="hero-mobile-promo" aria-label="Mobile promotional highlight">
+          <span class="hero-mobile-promo-kicker">Clinic promotion</span>
+          <strong>In-clinic blood tests</strong>
+          <span class="hero-mobile-promo-price">from £49</span>
+        </div>
+      </section>
+
+      <section class="section intro-band" aria-label="Clinic summary">
+        <div class="section-inner intro-grid">
+          <div>
+            <p class="eyebrow">AIO Medicals is the provider</p>
+            <h2>Private blood testing delivered by a real clinical team.</h2>
+          </div>
+          <p>
+            AIO Medicals provides in-clinic blood tests, health screening and phlebotomy appointments with a straightforward, professional approach led by founder Barry Logan.
+          </p>
+        </div>
+      </section>
+
+      <section id="barry" class="section barry-section">
+        <div class="section-inner barry-grid">
+          <div class="barry-card" aria-label="Barry Logan profile">
+            <figure class="barry-photo-card">
+              <img src="Barry new photo.png" alt="Barry Logan, founder of AIO Medicals, in blue medical scrubs in a clinical room">
+            </figure>
+            <div class="barry-card-copy">
+              <p class="eyebrow">Founder-led care</p>
+              <h3>Care led by Barry Logan</h3>
+              <p>
+                AIO Medicals is owned by Barry Logan, a qualified phlebotomist and Clinical Research Practitioner with hands-on experience across medical research, clinical trials and patient-facing care.
+              </p>
+            </div>
+          </div>
+          <div class="barry-copy">
+            <p class="eyebrow">About Barry</p>
+            <h2>Professional, trusted healthcare without unnecessary complexity.</h2>
+            <p>
+              Barry has worked in Phase 1 “First Time in Human” studies in London and has led teams across the South West as part of the Galleri Trial. That background gives AIO Medicals a calm, careful approach to sample collection, patient communication and clinical standards.
+            </p>
+            <p>
+              Through AIO Medicals, Barry provides accessible blood testing for people who want reliable care, clear information and a clinic appointment that feels personal rather than transactional.
+            </p>
+            <div class="credential-list">
+              <span>Qualified phlebotomist</span>
+              <span>Clinical Research Practitioner</span>
+              <span>Clinical trials background</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Blood test services</p>
+            <h2>Choose by health concern, not by confusing lab codes.</h2>
+            <p class="section-intro">Browse AIO Medicals’ in-clinic blood tests by health concern, then request the appointment that fits what you need.</p>
+          </div>
+
+          <div class="filter-bar" role="tablist" aria-label="Filter tests by category">
+            <button class="filter-button active" type="button" data-filter="all">All</button>
+            <button class="filter-button" type="button" data-filter="popular">Popular</button>
+            <button class="filter-button" type="button" data-filter="health">General health</button>
+            <button class="filter-button" type="button" data-filter="hormones">Hormones</button>
+            <button class="filter-button" type="button" data-filter="nutrition">Nutrition</button>
+          </div>
+
+          <div class="service-grid">
+            <article class="service-card" data-tags="popular health">
+              <span class="service-icon">+</span>
+              <h3>Premium Complete Blood Test</h3>
+              <p>Broad insight into blood count, inflammation, liver, kidney, cholesterol and metabolic markers.</p>
+              <a href="tests/premium-complete-blood-test.html">View test</a>
+            </article>
+            <article class="service-card" data-tags="popular health">
+              <span class="service-icon">Hb</span>
+              <h3>Full Blood Count Blood Test</h3>
+              <p>Checks red cells, white cells and platelets, often used when investigating tiredness or infection.</p>
+              <a href="tests/full-blood-count-blood-test.html">View test</a>
+            </article>
+            <article class="service-card" data-tags="popular health">
+              <span class="service-icon">T</span>
+              <h3>Thyroid Function Blood Test</h3>
+              <p>TSH, T4 and related markers for patients exploring fatigue, weight change or temperature sensitivity.</p>
+              <a href="tests/thyroid-function-blood-test.html">View test</a>
+            </article>
+            <article class="service-card" data-tags="popular nutrition">
+              <span class="service-icon">D</span>
+              <h3>Vitamins Blood Test</h3>
+              <p>Common nutrient checks for low energy, dietary changes, winter health or supplementation plans.</p>
+              <a href="tests/vitamins-blood-test.html">View test</a>
+            </article>
+            <article class="service-card" data-tags="health">
+              <span class="service-icon">LDL</span>
+              <h3>Cholesterol Blood Test</h3>
+              <p>Lipid markers that support conversations about cardiovascular risk and lifestyle choices.</p>
+              <a href="tests/cholesterol-blood-test.html">View test</a>
+            </article>
+            <article class="service-card" data-tags="health">
+              <span class="service-icon">A1c</span>
+              <h3>Diabetes (HbA1C) Blood Test</h3>
+              <p>Blood sugar checks for monitoring long-term glucose levels and metabolic health.</p>
+              <a href="tests/diabetes-hba1c-blood-test.html">View test</a>
+            </article>
+            <article class="service-card" data-tags="hormones">
+              <span class="service-icon">♀</span>
+              <h3>Women's Health Tests</h3>
+              <p>Hormone and wellbeing panels for cycle health, perimenopause, fertility and general screening.</p>
+              <a href="tests/index.html#womens-health-tests">View category</a>
+            </article>
+            <article class="service-card" data-tags="hormones">
+              <span class="service-icon">♂</span>
+              <h3>Men's Health Tests</h3>
+              <p>Targeted profiles including testosterone, prostate-related markers and cardiovascular risk checks.</p>
+              <a href="tests/index.html#mens-health-tests">View category</a>
+            </article>
+            <article class="service-card" data-tags="nutrition">
+              <span class="service-icon">Fe</span>
+              <h3>Anaemia Blood Test</h3>
+              <p>Ferritin, iron status and blood count markers for patients investigating tiredness or deficiency.</p>
+              <a href="tests/anaemia-blood-test.html">View test</a>
+            </article>
+          </div>
+
+          <div class="catalogue-preview">
+            <a class="category-row" href="tests/index.html#womens-health-tests">
+              <span>Women's Health Tests</span>
+              <strong>7 tests</strong>
+            </a>
+            <a class="category-row" href="tests/index.html#mens-health-tests">
+              <span>Men's Health Tests</span>
+              <strong>7 tests</strong>
+            </a>
+            <a class="category-row" href="tests/index.html#general-health-tests">
+              <span>General Health Tests</span>
+              <strong>15 tests</strong>
+            </a>
+            <a class="category-row" href="tests/index.html#prenatal-blood-tests">
+              <span>Prenatal Blood Tests</span>
+              <strong>7 tests</strong>
+            </a>
+            <a class="category-row" href="tests/index.html#food-allergy-nutrition-tests">
+              <span>Food, Allergy & Nutrition Tests</span>
+              <strong>8 tests</strong>
+            </a>
+            <a class="category-row" href="tests/phlebotomy-appointment.html">
+              <span>Phlebotomy Appointment</span>
+              <strong>Service</strong>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="pathway" class="section pathway-section">
+        <div class="section-inner">
+          <div class="section-heading compact">
+            <p class="eyebrow">Simple patient pathway</p>
+            <h2>Know what happens before you arrive.</h2>
+          </div>
+          <div class="pathway">
+            <article>
+              <span>01</span>
+              <h3>Choose a test</h3>
+              <p>Select a panel based on your health concern or ask the clinic to help you choose.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Attend clinic</h3>
+              <p>A trained clinician confirms your details and collects the blood sample in a short appointment.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Receive results</h3>
+              <p>Samples are processed by a laboratory and results are returned with clear next-step guidance.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="performance" class="section performance-section">
+        <div class="section-inner performance-grid">
+          <div class="performance-copy">
+            <p class="eyebrow">Performance & lifestyle blood testing</p>
+            <h2>Blood testing for people working on better health.</h2>
+            <p>
+              AIO Medicals works with Willers Coaching to connect lifestyle change, training and alcohol-free momentum with professional clinic-led blood test appointments.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="https://calendly.com/willerscoaching/30min" target="_blank" rel="noreferrer">Book a Discovery Call with Sean</a>
+              <a class="button secondary" href="sean-willers-blood-testing.html">Willers Coaching</a>
+            </div>
+          </div>
+          <div class="performance-media">
+            <img src="assets/sean-willers/sean-willers-intro.png" alt="Willers Coaching social media post">
+            <div>
+              <strong>@sean_willerscoaching</strong>
+              <span>Fitness, mindset, alcohol-free momentum and accountability through Willers Coaching.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="blog" class="section blog-preview-section">
+        <div class="section-inner">
+          <div class="section-heading compact">
+            <p class="eyebrow">Health & wellness blog</p>
+            <h2>Read local guidance before you book.</h2>
+            <p class="section-intro">Short articles for people comparing private blood tests, health screening and wellness options in Royal Tunbridge Wells, Mayfield and nearby areas.</p>
+          </div>
+
+          <div class="blog-preview-grid">
+            <article class="blog-card">
+              <div class="blog-card-media">
+                <img src="assets/test-page-images/test-tube-on-a-silver-table.png" alt="Private clinic blood test setup for wellness screening">
+              </div>
+              <div class="blog-card-body">
+                <p class="eyebrow">Mayfield & Tunbridge Wells</p>
+                <h2>Wellness blood tests near Mayfield and Tunbridge Wells: how to build a smarter health baseline</h2>
+                <div class="blog-card-meta">
+                  <span>Wellness screening</span>
+                  <span>Health baseline</span>
+                  <span>Local guide</span>
+                </div>
+                <p>See how a private wellness blood test can help you build a more useful health baseline, track change over time and book with more confidence.</p>
+                <a class="blog-card-link" href="blog/wellness-blood-tests-mayfield-tunbridge-wells.html">Read the article</a>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-card-media">
+                <img class="focus-face-high" src="assets/sean-willers/sean-willers-intro.png" alt="Sports performance coaching image for blood testing article">
+              </div>
+              <div class="blog-card-body">
+                <p class="eyebrow">Performance guide</p>
+                <h2>Sports performance blood tests in Tunbridge Wells: what active people should track for recovery and progress</h2>
+                <div class="blog-card-meta">
+                  <span>Tunbridge Wells</span>
+                  <span>Sports performance</span>
+                  <span>Recovery</span>
+                </div>
+                <p>For active patients, the right blood test can support training, recovery and better decision-making. This guide explains where to start.</p>
+                <a class="blog-card-link" href="blog/sports-performance-blood-tests-tunbridge-wells.html">Read the article</a>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-card-media">
+                <img class="focus-face-mid" src="Barry new photo.png" alt="Barry Logan in blue medical scrubs for men's health blood testing article">
+              </div>
+              <div class="blog-card-body">
+                <p class="eyebrow">Men's health guide</p>
+                <h2>Men's health blood tests in Kent and Tunbridge Wells: building a smarter check on hormones, energy and risk</h2>
+                <div class="blog-card-meta">
+                  <span>Kent</span>
+                  <span>Men's health</span>
+                  <span>Hormones & risk</span>
+                </div>
+                <p>Explore when a men's health blood test is useful, what it can help monitor, and how to book a private route that actually matches your goals.</p>
+                <a class="blog-card-link" href="blog/mens-health-blood-tests-kent-tunbridge-wells.html">Read the article</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="blog-preview-footer">
+            <a class="button secondary" href="blog/index.html">View all blog posts</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="trust" class="section trust-section">
+        <div class="section-inner trust-grid">
+          <div class="trust-copy">
+            <p class="eyebrow">Why patients choose AIO</p>
+            <h2>Clear blood testing from a clinic that takes the appointment seriously.</h2>
+            <p>
+              Blood tests can feel confusing, especially when people are unsure which panel they need or what happens after the sample is taken. AIO Medicals keeps the process simple, careful and human from the first enquiry.
+            </p>
+          </div>
+          <div class="trust-list">
+            <div>
+              <strong>Founder-led service</strong>
+              <span>Barry Logan brings clinical research and phlebotomy experience into the patient appointment.</span>
+            </div>
+            <div>
+              <strong>Transparent test information</strong>
+              <span>Test scope, preparation and expected result timing are explained before booking.</span>
+            </div>
+            <div>
+              <strong>Professional phlebotomy</strong>
+              <span>Blood samples are collected in a calm clinical setting by trained staff.</span>
+            </div>
+            <div>
+              <strong>Privacy-led experience</strong>
+              <span>Discreet appointments and patient-first communication.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="locations" class="section locations-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Clinic locations</p>
+            <h2>Book your blood test at one of two AIO Medicals locations.</h2>
+            <p class="section-intro">Appointments are available in Royal Tunbridge Wells and Mayfield. The clinic will confirm the most suitable location when arranging your appointment.</p>
+          </div>
+
+          <div class="locations-grid">
+            <article class="location-card">
+              <div class="location-copy">
+                <p class="eyebrow">Royal Tunbridge Wells</p>
+                <h3>AIO Medicals at The Spring Rooms</h3>
+                <address>
+                  The Spring Rooms<br>
+                  4 Sussex Mews<br>
+                  Royal Tunbridge Wells<br>
+                  TN2 5QJ
+                </address>
+                <a href="https://www.google.com/maps/search/?api=1&query=The%20Spring%20Rooms%204%20Sussex%20Mews%20Royal%20Tunbridge%20Wells%20TN2%205QJ" target="_blank" rel="noreferrer">Open in Google Maps</a>
+              </div>
+              <div class="map-frame">
+                <iframe
+                  title="Map showing AIO Medicals at The Spring Rooms, Royal Tunbridge Wells"
+                  src="https://maps.google.com/maps?q=The%20Spring%20Rooms%204%20Sussex%20Mews%20Royal%20Tunbridge%20Wells%20TN2%205QJ&output=embed"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </article>
+
+            <article class="location-card">
+              <div class="location-copy">
+                <p class="eyebrow">Mayfield</p>
+                <h3>AIO Medicals at Mayfield Osteopaths</h3>
+                <address>
+                  Mayfield Osteopaths<br>
+                  Mayfield<br>
+                  East Sussex<br>
+                  TN20 6AL
+                </address>
+                <a href="https://www.google.com/maps/search/?api=1&query=Mayfield%20Osteopaths%20Mayfield%20East%20Sussex%20TN20%206AL" target="_blank" rel="noreferrer">Open in Google Maps</a>
+              </div>
+              <div class="map-frame">
+                <iframe
+                  title="Map showing AIO Medicals at Mayfield Osteopaths, Mayfield"
+                  src="https://maps.google.com/maps?q=Mayfield%20Osteopaths%20Mayfield%20East%20Sussex%20TN20%206AL&output=embed"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="booking" class="section booking-section">
+        <div class="section-inner booking-grid">
+          <div>
+            <p class="eyebrow">Book with AIO Medicals</p>
+            <h2>Book a clear 30-minute consultation.</h2>
+            <p>
+              Choose the appointment that fits you best. Both consultation options are 30 minutes and cost £10.
+            </p>
+            <div class="contact-strip">
+              <a href="tel:+447825563775">07825 563775</a>
+              <a href="mailto:hello@aio-medicals.com">hello@aio-medicals.com</a>
+            </div>
+          </div>
+          <div class="booking-form booking-actions-panel" aria-label="Appointment booking options">
+            <a class="button primary form-button" href="https://calendly.com/aiomedicals" target="_blank" rel="noreferrer">Book an appointment</a>
+            <a class="button secondary" href="https://calendly.com/aiomedicals/30min?back=1&amp;month=2026-05" target="_blank" rel="noreferrer">Book an on-line consultation</a>
+            <a class="button secondary" href="tests/index.html">View blood tests</a>
+            <p class="form-note">If you are unsure which test to choose, book a consultation first and AIO Medicals will guide you.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section faq-section">
+        <div class="section-inner">
+          <div class="section-heading compact">
+            <p class="eyebrow">Patient questions</p>
+            <h2>Helpful answers before booking.</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>Do I need a GP referral?</summary>
+              <p>Many private blood tests can be booked directly. AIO Medicals will help confirm which test is suitable before your appointment is arranged.</p>
+            </details>
+            <details>
+              <summary>How quickly are results available?</summary>
+              <p>Turnaround depends on the panel and laboratory processing time. AIO Medicals will confirm the expected result window before booking.</p>
+            </details>
+            <details>
+              <summary>Can I book phlebotomy only?</summary>
+              <p>Yes. AIO Medicals can provide a phlebotomy appointment for patients who need a professional blood draw, including agreed external kit pathways where appropriate.</p>
+            </details>
+            <details>
+              <summary>Will someone explain my results?</summary>
+              <p>AIO Medicals will explain how your results will be returned before you book. Some results may need follow-up with your GP or an appropriate specialist.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="assets/aio-medicals-logo-white.png" alt="AIO Medicals">
+          <p>Private blood tests, health screens and professional phlebotomy appointments in Royal Tunbridge Wells and Mayfield.</p>
+          <div class="footer-contact">
+            <a href="tel:+447825563775">07825 563775</a>
+            <a href="mailto:hello@aio-medicals.com">hello@aio-medicals.com</a>
+          </div>
+        </div>
+        <div class="footer-columns">
+          <nav aria-label="Footer tests navigation">
+            <h2>Services</h2>
+            <a href="tests/index.html">All blood tests</a>
+            <a href="tests/index.html#general-health-tests">General health</a>
+            <a href="tests/index.html#food-allergy-nutrition-tests">Nutrition & allergy</a>
+            <a href="tests/phlebotomy-appointment.html">Phlebotomy</a>
+          </nav>
+          <nav aria-label="Footer clinic navigation">
+            <h2>Clinic</h2>
+            <a href="#pathway">How it works</a>
+            <a href="#locations">Locations</a>
+            <a href="#trust">Trust</a>
+            <a href="#faq">FAQs</a>
+          </nav>
+          <div class="footer-locations">
+            <h2>Locations</h2>
+            <p>The Spring Rooms<br>Royal Tunbridge Wells, TN2 5QJ</p>
+            <p>Mayfield Osteopaths<br>Mayfield, TN20 6AL</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© AIO Medicals</span>
+        <a href="https://www.aio-medicals.com">aio-medicals.com</a>
+      </div>
+    </footer>
+
+    <script src="test-catalogue.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
