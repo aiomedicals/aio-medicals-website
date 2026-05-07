@@ -4452,12 +4452,18 @@ details p {
   .barry-grid,
   .performance-grid,
   .partner-hero-grid,
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+
   .partner-roles-grid,
-  .social-grid,
   .recommended-test-grid,
   .service-grid,
-  .concept-grid {
-    grid-template-columns: 1fr;
+  .concept-grid,
+  .blog-grid,
+  .blog-preview-grid,
+  .video-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .compact-test-card {
@@ -4652,6 +4658,15 @@ details p {
     grid-template-columns: 1fr;
   }
 
+  .partner-roles-grid,
+  .recommended-test-grid,
+  .service-grid,
+  .concept-grid,
+  .video-grid,
+  .footer-columns {
+    grid-template-columns: 1fr;
+  }
+
   .test-page .test-summary-card {
     border-radius: 18px;
     padding: 14px;
@@ -4736,6 +4751,15 @@ details p {
   .recommended-test-grid,
   .video-grid {
     gap: 14px;
+  }
+
+  .blog-card-body,
+  .blog-sidebar-card,
+  .blog-article-body,
+  .blood-tests-panel,
+  .blood-tests-lists {
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .role-card,

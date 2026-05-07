@@ -7,7 +7,7 @@ const bloodTestsMenu = document.querySelector(".blood-tests-menu");
 const bloodTestsToggle = document.querySelector(".nav-dropdown-toggle");
 const bloodTestsPanel = document.querySelector(".blood-tests-panel");
 const desktopMegaMenuQuery = window.matchMedia("(min-width: 921px) and (hover: hover) and (pointer: fine)");
-const SITE_BASE_URL = "https://www.aio-medicals.com";
+const SITE_BASE_URL = "https://aio-medicals.com";
 const DEFAULT_SOCIAL_IMAGE = `${SITE_BASE_URL}/assets/clinic-hero.png`;
 const MAIN_BOOKING_URL = "https://calendly.com/aiomedicals";
 const CLINIC_PHONE = "+447825563775";
@@ -533,8 +533,14 @@ function openBloodTestsMenu() {
 
 function normaliseTestUrl(url) {
   const isInTestsFolder = window.location.pathname.includes("/tests/");
+  const isInBlogFolder = window.location.pathname.includes("/blog/");
+
   if (isInTestsFolder) {
     return url.replace(/^tests\//, "");
+  }
+
+  if (isInBlogFolder) {
+    return url.startsWith("tests/") ? `../${url}` : `../tests/${url}`;
   }
 
   return url.startsWith("tests/") ? url : `tests/${url}`;
