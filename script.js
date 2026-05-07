@@ -550,9 +550,14 @@ function openBloodTestsMenu() {
 
 function normaliseTestUrl(url) {
   const prettyUrl = toPrettyInternalUrl(url);
-  const isInTestsFolder = window.location.pathname.includes("/tests/");
-  if (isInTestsFolder) {
+  const path = window.location.pathname || "/";
+
+  if (path.includes("/tests/")) {
     return prettyUrl.replace(/^tests\//, "");
+  }
+
+  if (path.includes("/blog/")) {
+    return `../${prettyUrl.startsWith("tests/") ? prettyUrl : `tests/${prettyUrl}`}`;
   }
 
   return prettyUrl.startsWith("tests/") ? prettyUrl : `tests/${prettyUrl}`;
