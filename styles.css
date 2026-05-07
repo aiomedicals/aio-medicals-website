@@ -4684,6 +4684,10 @@ details p {
     grid-template-columns: 1fr;
   }
 
+  .blog-article-body .check-list + h2 {
+    margin-top: 42px;
+  }
+
   .test-page .test-summary-card {
     border-radius: 18px;
     padding: 14px;
