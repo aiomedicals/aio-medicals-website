@@ -2121,7 +2121,11 @@ details p {
 }
 
 .blog-article-body .check-list {
-  margin-top: 18px;
+  margin: 18px 0 30px;
+}
+
+.blog-article-body .check-list + h2 {
+  margin-top: 30px;
 }
 
 .blog-article-body .check-list li {
