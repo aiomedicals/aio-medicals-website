@@ -1,0 +1,6 @@
+/index.html /
+/blog/index.html /blog/ 301!
+/tests/index.html /tests/ 301!
+/blog/:slug.html /blog/:slug 301!
+/tests/:slug.html /tests/:slug 301!
+/:slug.html /:slug 301!

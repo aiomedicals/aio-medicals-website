@@ -7,7 +7,7 @@ const bloodTestsMenu = document.querySelector(".blood-tests-menu");
 const bloodTestsToggle = document.querySelector(".nav-dropdown-toggle");
 const bloodTestsPanel = document.querySelector(".blood-tests-panel");
 const desktopMegaMenuQuery = window.matchMedia("(min-width: 921px) and (hover: hover) and (pointer: fine)");
-const SITE_BASE_URL = "https://aio-medicals.com";
+const SITE_BASE_URL = "https://www.aio-medicals.com";
 const DEFAULT_SOCIAL_IMAGE = `${SITE_BASE_URL}/assets/clinic-hero.png`;
 const MAIN_BOOKING_URL = "https://calendly.com/aiomedicals";
 const CLINIC_PHONE = "+447825563775";
@@ -15,51 +15,51 @@ const CLINIC_EMAIL = "hello@aio-medicals.com";
 const BLOG_ARTICLES = {
   "private-blood-testing-tunbridge-wells": {
     title: "Private blood testing in Tunbridge Wells",
-    url: "blog/private-blood-testing-tunbridge-wells.html",
+    url: "blog/private-blood-testing-tunbridge-wells",
   },
   "wellness-blood-tests-mayfield-tunbridge-wells": {
     title: "Wellness blood tests near Mayfield and Tunbridge Wells",
-    url: "blog/wellness-blood-tests-mayfield-tunbridge-wells.html",
+    url: "blog/wellness-blood-tests-mayfield-tunbridge-wells",
   },
   "fatigue-blood-tests-tunbridge-wells": {
     title: "Fatigue blood tests in Tunbridge Wells",
-    url: "blog/fatigue-blood-tests-tunbridge-wells.html",
+    url: "blog/fatigue-blood-tests-tunbridge-wells",
   },
   "menopause-blood-tests-tunbridge-wells": {
     title: "Menopause blood tests in Tunbridge Wells",
-    url: "blog/menopause-blood-tests-tunbridge-wells.html",
+    url: "blog/menopause-blood-tests-tunbridge-wells",
   },
   "thyroid-blood-tests-mayfield-tunbridge-wells": {
     title: "Thyroid blood tests near Mayfield and Tunbridge Wells",
-    url: "blog/thyroid-blood-tests-mayfield-tunbridge-wells.html",
+    url: "blog/thyroid-blood-tests-mayfield-tunbridge-wells",
   },
   "cholesterol-blood-tests-tunbridge-wells-kent": {
     title: "Cholesterol blood tests in Tunbridge Wells and Kent",
-    url: "blog/cholesterol-blood-tests-tunbridge-wells-kent.html",
+    url: "blog/cholesterol-blood-tests-tunbridge-wells-kent",
   },
   "sports-performance-blood-tests-tunbridge-wells": {
     title: "Sports performance blood tests in Tunbridge Wells",
-    url: "blog/sports-performance-blood-tests-tunbridge-wells.html",
+    url: "blog/sports-performance-blood-tests-tunbridge-wells",
   },
   "mens-health-blood-tests-kent-tunbridge-wells": {
     title: "Men's health blood tests in Kent and Tunbridge Wells",
-    url: "blog/mens-health-blood-tests-kent-tunbridge-wells.html",
+    url: "blog/mens-health-blood-tests-kent-tunbridge-wells",
   },
   "womens-health-blood-tests-mayfield-tunbridge-wells": {
     title: "Women's health blood tests near Mayfield and Tunbridge Wells",
-    url: "blog/womens-health-blood-tests-mayfield-tunbridge-wells.html",
+    url: "blog/womens-health-blood-tests-mayfield-tunbridge-wells",
   },
   "vitamin-deficiency-blood-tests-kent-east-sussex": {
     title: "Vitamin deficiency blood tests in Kent and East Sussex",
-    url: "blog/vitamin-deficiency-blood-tests-kent-east-sussex.html",
+    url: "blog/vitamin-deficiency-blood-tests-kent-east-sussex",
   },
   "prostate-blood-tests-kent-tunbridge-wells": {
     title: "Prostate blood tests in Kent and Tunbridge Wells",
-    url: "blog/prostate-blood-tests-kent-tunbridge-wells.html",
+    url: "blog/prostate-blood-tests-kent-tunbridge-wells",
   },
   "weight-loss-blood-tests-mayfield-tunbridge-wells": {
     title: "Weight loss blood tests near Mayfield and Tunbridge Wells",
-    url: "blog/weight-loss-blood-tests-mayfield-tunbridge-wells.html",
+    url: "blog/weight-loss-blood-tests-mayfield-tunbridge-wells",
   },
 };
 const testPriceGuide = {
@@ -109,19 +109,34 @@ const testPriceGuide = {
   "weight-loss-blood-test": "99.00",
 };
 
+function stripHtmlExtension(path = "") {
+  if (!path) return path;
+  if (path.endsWith("/index.html")) {
+    const trimmedIndex = path.slice(0, -10);
+    return trimmedIndex || "/";
+  }
+  return path.replace(/\.html(?=($|#|\?))/, "");
+}
+
+function toPrettyInternalUrl(path = "") {
+  if (!path) return path;
+  if (path === "index.html") return "./";
+  if (path.startsWith("index.html#")) return `./${path.slice("index.html".length)}`;
+  if (path === "tests/index.html") return "tests/";
+  if (path.startsWith("tests/index.html#")) return `tests/${path.slice("tests/index.html".length)}`;
+  if (path === "blog/index.html") return "blog/";
+  if (path.startsWith("blog/index.html#")) return `blog/${path.slice("blog/index.html".length)}`;
+  return stripHtmlExtension(path);
+}
+
 function getCanonicalPath() {
   const path = window.location.pathname || "/";
 
   if (window.location.protocol === "file:") {
-    const knownPageSegments = ["/blog/", "/tests/", "/sean-willers-blood-testing.html", "/index.html"];
-    const matchedSegment = knownPageSegments.find((segment) => path.includes(segment));
-
-    if (matchedSegment) {
-      const segmentIndex = path.indexOf(matchedSegment);
-      return path.slice(segmentIndex) || "/";
-    }
-
-    return "/";
+    const workspacePath = "/AiO-Medicals-Site-Master";
+    const workspaceIndex = path.indexOf(workspacePath);
+    const relativePath = workspaceIndex >= 0 ? path.slice(workspaceIndex + workspacePath.length) : path;
+    return relativePath || "/";
   }
 
   return path;
@@ -129,7 +144,7 @@ function getCanonicalPath() {
 
 function getPublicUrl(path = getCanonicalPath()) {
   if (!path || path === "/") return SITE_BASE_URL;
-  const trimmedPath = path.endsWith("/index.html") ? `${path.slice(0, -10) || "/"}` : path;
+  const trimmedPath = stripHtmlExtension(path);
   return `${SITE_BASE_URL}${trimmedPath === "/" ? "" : trimmedPath}`;
 }
 
@@ -196,7 +211,7 @@ function getPageSchemaType() {
   if (document.querySelector(".blog-article-page")) return "blog-article";
   if (document.querySelector(".blog-page")) return "blog-hub";
   if (document.querySelector(".test-page")) return "test-page";
-  if (window.location.pathname.includes("/tests/index")) return "test-hub";
+  if (document.querySelector(".catalogue-page") && window.location.pathname.includes("/tests")) return "test-hub";
   return "web-page";
 }
 
@@ -404,10 +419,12 @@ function enhanceTestPagesWithRelatedGuides() {
 }
 
 function getCurrentTestSlug() {
-  const path = window.location.pathname;
-  const fileName = path.split("/").pop() || "";
+  const path = stripHtmlExtension(window.location.pathname || "");
+  const segments = path.split("/").filter(Boolean);
+  const fileName = segments[segments.length - 1] || "";
 
-  return fileName.endsWith(".html") ? fileName.slice(0, -5) : "";
+  if (["tests", "blog"].includes(fileName)) return "";
+  return fileName;
 }
 
 function buildPriceMarkup(slug) {
@@ -532,24 +549,20 @@ function openBloodTestsMenu() {
 }
 
 function normaliseTestUrl(url) {
+  const prettyUrl = toPrettyInternalUrl(url);
   const isInTestsFolder = window.location.pathname.includes("/tests/");
-  const isInBlogFolder = window.location.pathname.includes("/blog/");
-
   if (isInTestsFolder) {
-    return url.replace(/^tests\//, "");
+    return prettyUrl.replace(/^tests\//, "");
   }
 
-  if (isInBlogFolder) {
-    return url.startsWith("tests/") ? `../${url}` : `../tests/${url}`;
-  }
-
-  return url.startsWith("tests/") ? url : `tests/${url}`;
+  return prettyUrl.startsWith("tests/") ? prettyUrl : `tests/${prettyUrl}`;
 }
 
 function normaliseSiteUrl(url) {
   const isNestedPage = window.location.pathname.includes("/tests/") || window.location.pathname.includes("/blog/");
+  const prettyUrl = toPrettyInternalUrl(url);
 
-  return isNestedPage ? `../${url}` : url;
+  return isNestedPage ? `../${prettyUrl}` : prettyUrl;
 }
 
 function ensureBlogNavLink() {

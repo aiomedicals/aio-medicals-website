@@ -1870,19 +1870,7 @@ details p {
   text-align: center;
 }
 
-.blog-article-hero .section-inner {
-  margin: 0 auto;
-  max-width: 1080px;
-  text-align: center;
-}
-
 .blog-hub-hero h1 {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 980px;
-}
-
-.blog-article-hero h1 {
   margin-left: auto;
   margin-right: auto;
   max-width: 980px;
@@ -1895,12 +1883,6 @@ details p {
 }
 
 .blog-hub-hero .hero-copy {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 900px;
-}
-
-.blog-article-hero .hero-copy {
   margin-left: auto;
   margin-right: auto;
   max-width: 900px;
@@ -1933,11 +1915,6 @@ details p {
   font-size: 0.94rem;
   font-weight: 700;
   margin-bottom: 18px;
-}
-
-.blog-article-hero .blog-breadcrumbs,
-.blog-article-hero .blog-article-meta {
-  justify-content: center;
 }
 
 .blog-breadcrumbs a {
@@ -2099,16 +2076,11 @@ details p {
 .blog-article-wrap {
   display: grid;
   gap: 24px;
-  grid-template-columns: minmax(0, 860px);
-  justify-content: center;
+  grid-template-columns: minmax(0, 1fr) 300px;
 }
 
 .blog-article-body {
   padding: 30px;
-}
-
-.blog-article-wrap .blog-sidebar-card {
-  width: 100%;
 }
 
 .blog-article-body blockquote {
@@ -2127,7 +2099,7 @@ details p {
 }
 
 .blog-article-body .check-list {
-  margin: 18px 0 30px;
+  margin-top: 18px;
 }
 
 .blog-article-body .check-list li {
@@ -4450,20 +4422,19 @@ details p {
   .hero-metrics,
   .intro-grid,
   .barry-grid,
+  .pathway,
+  .trust-grid,
+  .locations-grid,
+  .booking-grid,
+  .blog-preview-grid,
   .performance-grid,
   .partner-hero-grid,
-  .social-grid {
-    grid-template-columns: 1fr;
-  }
-
   .partner-roles-grid,
+  .social-grid,
   .recommended-test-grid,
   .service-grid,
-  .concept-grid,
-  .blog-grid,
-  .blog-preview-grid,
-  .video-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .concept-grid {
+    grid-template-columns: 1fr;
   }
 
   .compact-test-card {
@@ -4634,6 +4605,19 @@ details p {
     padding: 62px 18px;
   }
 
+  .pathway {
+    gap: 14px;
+  }
+
+  .location-card,
+  .booking-form {
+    padding: 18px;
+  }
+
+  .map-frame {
+    height: 240px;
+  }
+
   .test-page,
   .catalogue-page,
   .partner-page,
@@ -4651,19 +4635,26 @@ details p {
     padding: 48px 18px;
   }
 
+  .test-page .test-hero-grid,
+  .test-page .detail-grid,
+  .test-page .booking-grid,
+  .test-page .mini-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .test-page .test-hero-grid {
+    gap: 20px;
+  }
+
+  .test-page .test-hero h1 {
+    max-width: none;
+    overflow-wrap: normal;
+  }
+
   .blog-grid,
   .blog-preview-grid,
   .blog-hub-grid,
   .blog-article-wrap {
-    grid-template-columns: 1fr;
-  }
-
-  .partner-roles-grid,
-  .recommended-test-grid,
-  .service-grid,
-  .concept-grid,
-  .video-grid,
-  .footer-columns {
     grid-template-columns: 1fr;
   }
 
@@ -4674,6 +4665,10 @@ details p {
 
   .test-page .pathway-section .booking-grid {
     gap: 24px;
+  }
+
+  .test-page .mini-card {
+    min-height: 0;
   }
 
   .test-page .pathway-section .booking-grid > div:first-child {
@@ -4751,15 +4746,6 @@ details p {
   .recommended-test-grid,
   .video-grid {
     gap: 14px;
-  }
-
-  .blog-card-body,
-  .blog-sidebar-card,
-  .blog-article-body,
-  .blood-tests-panel,
-  .blood-tests-lists {
-    padding-left: 18px;
-    padding-right: 18px;
   }
 
   .role-card,
