@@ -1673,6 +1673,29 @@ textarea:focus {
   max-width: 960px;
 }
 
+.faq-layout {
+  align-items: start;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.faq-form {
+  position: sticky;
+  top: 112px;
+}
+
+.faq-form h3 {
+  font-size: 1.55rem;
+  margin-bottom: 6px;
+}
+
+.faq-form-copy {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
 details {
   background: #fff;
   border: 1px solid var(--line);
@@ -1781,6 +1804,21 @@ details p {
   line-height: 1.55;
   margin: 0 18px 10px;
   padding: 18px 22px;
+}
+
+.faq-form .form-note {
+  color: #657b87;
+}
+
+@media (max-width: 920px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-form {
+    position: static;
+    top: auto;
+  }
 }
 
 .site-footer {

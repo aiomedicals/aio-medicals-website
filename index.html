@@ -554,23 +554,70 @@
             <p class="eyebrow">Patient questions</p>
             <h2>Helpful answers before booking.</h2>
           </div>
-          <div class="faq-list">
-            <details>
-              <summary>Do I need a GP referral?</summary>
-              <p>Many private blood tests can be booked directly. AIO Medicals will help confirm which test is suitable before your appointment is arranged.</p>
-            </details>
-            <details>
-              <summary>How quickly are results available?</summary>
-              <p>Turnaround depends on the panel and laboratory processing time. AIO Medicals will confirm the expected result window before booking.</p>
-            </details>
-            <details>
-              <summary>Can I book phlebotomy only?</summary>
-              <p>Yes. AIO Medicals can provide a phlebotomy appointment for patients who need a professional blood draw, including agreed external kit pathways where appropriate.</p>
-            </details>
-            <details>
-              <summary>Will someone explain my results?</summary>
-              <p>AIO Medicals will explain how your results will be returned before you book. Some results may need follow-up with your GP or an appropriate specialist.</p>
-            </details>
+          <div class="faq-layout">
+            <div class="faq-list">
+              <details>
+                <summary>Do I need a GP referral?</summary>
+                <p>Many private blood tests can be booked directly. AIO Medicals will help confirm which test is suitable before your appointment is arranged.</p>
+              </details>
+              <details>
+                <summary>How quickly are results available?</summary>
+                <p>Turnaround depends on the panel and laboratory processing time. AIO Medicals will confirm the expected result window before booking.</p>
+              </details>
+              <details>
+                <summary>Can I book phlebotomy only?</summary>
+                <p>Yes. AIO Medicals can provide a phlebotomy appointment for patients who need a professional blood draw, including agreed external kit pathways where appropriate.</p>
+              </details>
+              <details>
+                <summary>Will someone explain my results?</summary>
+                <p>AIO Medicals will explain how your results will be returned before you book. Some results may need follow-up with your GP or an appropriate specialist.</p>
+              </details>
+            </div>
+
+            <form class="booking-form faq-form" aria-label="Send an enquiry to AIO Medicals">
+              <p class="eyebrow">Send an enquiry</p>
+              <h3>Ask a quick question.</h3>
+              <p class="faq-form-copy">Use this form if you want help choosing a test or booking the right appointment. When you submit, your email app will open with your message ready to send.</p>
+              <input type="hidden" name="subject" value="Website enquiry from AIO Medicals homepage">
+
+              <label>
+                Your name
+                <input type="text" name="name" autocomplete="name" required>
+              </label>
+
+              <label>
+                Email address
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+
+              <label>
+                Phone number
+                <input type="tel" name="phone" autocomplete="tel">
+              </label>
+
+              <label>
+                Blood test category
+                <select name="blood test category" autocomplete="off">
+                  <option value="">Select a category if you know it</option>
+                  <option value="General health">General health</option>
+                  <option value="Women's health">Women's health</option>
+                  <option value="Men's health">Men's health</option>
+                  <option value="Nutrition and allergy">Nutrition and allergy</option>
+                  <option value="Hormones">Hormones</option>
+                  <option value="Sports and fitness">Sports and fitness</option>
+                  <option value="Pregnancy and prenatal">Pregnancy and prenatal</option>
+                  <option value="Phlebotomy">Phlebotomy</option>
+                </select>
+              </label>
+
+              <label>
+                What do you need help with?
+                <textarea name="message" placeholder="Tell AIO Medicals what you would like to book or ask." required></textarea>
+              </label>
+
+              <button class="button primary form-button" type="submit">Send enquiry</button>
+              <p class="form-note">Your message will be addressed to AIO Medicals at info@aio-medicals.com and routed via the website form email setup.</p>
+            </form>
           </div>
         </div>
       </section>

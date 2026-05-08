@@ -2,7 +2,7 @@ const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector(".site-nav");
 const filterButtons = document.querySelectorAll(".filter-button");
 const serviceCards = document.querySelectorAll(".service-card");
-const bookingForm = document.querySelector(".booking-form");
+const bookingForm = document.querySelector("form.booking-form");
 const bloodTestsMenu = document.querySelector(".blood-tests-menu");
 const bloodTestsToggle = document.querySelector(".nav-dropdown-toggle");
 const bloodTestsPanel = document.querySelector(".blood-tests-panel");
@@ -888,6 +888,15 @@ function setActiveBloodTestsCategory(index) {
   });
 }
 
+function updateFooterCopyrightNotice() {
+  const footerBottom = document.querySelector(".footer-bottom");
+  const footerNotice = footerBottom?.querySelector("span");
+
+  if (footerNotice) {
+    footerNotice.textContent = "© AIO Medicals 2026";
+  }
+}
+
 buildBloodTestsMenu();
 ensureBlogNavLink();
 ensureBookingNavLink();
@@ -899,6 +908,7 @@ enhanceTestPagesWithRelatedGuides();
 ensureSeoMetadata();
 localiseExistingInternalLinks();
 createCookieConsentUi();
+updateFooterCopyrightNotice();
 
 bloodTestsToggle?.addEventListener("click", (event) => {
   event.stopPropagation();
@@ -977,6 +987,8 @@ if (bookingForm instanceof HTMLFormElement) {
     event.preventDefault();
     const button = bookingForm.querySelector("button");
     if (button instanceof HTMLButtonElement) {
+      const originalLabel = button.dataset.defaultLabel || button.textContent || "Submit";
+      button.dataset.defaultLabel = originalLabel;
       button.textContent = "Opening email";
       button.disabled = true;
     }
@@ -985,7 +997,7 @@ if (bookingForm instanceof HTMLFormElement) {
 
     if (button instanceof HTMLButtonElement) {
       window.setTimeout(() => {
-        button.textContent = "Request appointment";
+        button.textContent = button.dataset.defaultLabel || "Submit";
         button.disabled = false;
       }, 2600);
     }
