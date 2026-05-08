@@ -11,7 +11,8 @@ const SITE_BASE_URL = "https://www.aio-medicals.com";
 const DEFAULT_SOCIAL_IMAGE = `${SITE_BASE_URL}/assets/clinic-hero.png`;
 const MAIN_BOOKING_URL = "https://calendly.com/aiomedicals";
 const CLINIC_PHONE = "+447825563775";
-const CLINIC_EMAIL = "aiomedicals@gmail.com";
+const CLINIC_EMAIL = "info@aio-medicals.com";
+const FORM_SUBMISSION_EMAIL = "aiomedicals@gmail.com";
 const COOKIE_CONSENT_STORAGE_KEY = "aioCookieConsent";
 const COOKIE_CONSENT_VALUES = {
   ACCEPT_ALL: "accept-all",
@@ -585,9 +586,40 @@ function enhanceTestPageNextSteps() {
   ctaPanel.innerHTML = `
     <a class="button primary" href="https://calendly.com/aiomedicals" target="_blank" rel="noreferrer">Book an appointment</a>
     <a class="button secondary" href="https://calendly.com/aiomedicals/30min?back=1&month=2026-05" target="_blank" rel="noreferrer">Book an on-line consultation</a>
-    <a class="button secondary" href="mailto:aiomedicals@gmail.com?subject=${emailSubject}">Email</a>
+    <a class="button secondary" href="mailto:${CLINIC_EMAIL}?subject=${emailSubject}">Email</a>
     <a class="button secondary" href="tel:+447825563775">Call</a>
   `;
+}
+
+function formatFormFieldLabel(name = "") {
+  return name
+    .replace(/[\[\]_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function buildFormMailtoLink(form) {
+  const formData = new FormData(form);
+  const subjectValue = formData.get("subject");
+  const subject = typeof subjectValue === "string" && subjectValue.trim()
+    ? subjectValue.trim()
+    : "Website enquiry";
+  const bodyLines = [];
+
+  formData.forEach((value, key) => {
+    if (key === "subject") return;
+    const normalisedValue = String(value).trim();
+    if (!normalisedValue) return;
+    bodyLines.push(`${formatFormFieldLabel(key)}: ${normalisedValue}`);
+  });
+
+  const queryParts = [`subject=${encodeURIComponent(subject)}`];
+  if (bodyLines.length) {
+    queryParts.push(`body=${encodeURIComponent(bodyLines.join("\n"))}`);
+  }
+
+  return `mailto:${FORM_SUBMISSION_EMAIL}?${queryParts.join("&")}`;
 }
 
 function enhanceTestPageHeroActions() {
@@ -942,16 +974,20 @@ filterButtons.forEach((button) => {
 
 if (bookingForm instanceof HTMLFormElement) {
   bookingForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const button = bookingForm.querySelector("button");
-  if (!button) return;
+    event.preventDefault();
+    const button = bookingForm.querySelector("button");
+    if (button instanceof HTMLButtonElement) {
+      button.textContent = "Opening email";
+      button.disabled = true;
+    }
 
-  button.textContent = "Request noted";
-  button.disabled = true;
+    window.location.href = buildFormMailtoLink(bookingForm);
 
-  window.setTimeout(() => {
-    button.textContent = "Request appointment";
-    button.disabled = false;
-  }, 2600);
+    if (button instanceof HTMLButtonElement) {
+      window.setTimeout(() => {
+        button.textContent = "Request appointment";
+        button.disabled = false;
+      }, 2600);
+    }
   });
 }
