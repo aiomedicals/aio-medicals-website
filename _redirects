@@ -3,7 +3,6 @@
 /blog/index.html /blog/ 301!
 /tests /tests/ 301!
 /tests/index.html /tests/ 301!
-/thank-you /thank-you/ 301!
 /blog/*.html /blog/:splat 301!
 /tests/*.html /tests/:splat 301!
 /*.html /:splat 301!

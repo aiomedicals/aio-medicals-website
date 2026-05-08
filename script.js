@@ -5,6 +5,7 @@ const serviceCards = document.querySelectorAll(".service-card");
 const bloodTestsMenu = document.querySelector(".blood-tests-menu");
 const bloodTestsToggle = document.querySelector(".nav-dropdown-toggle");
 const bloodTestsPanel = document.querySelector(".blood-tests-panel");
+const homepageEnquiryForm = document.querySelector('form[name="homepage-enquiry"]');
 const desktopMegaMenuQuery = window.matchMedia("(min-width: 921px) and (hover: hover) and (pointer: fine)");
 const SITE_BASE_URL = "https://www.aio-medicals.com";
 const DEFAULT_SOCIAL_IMAGE = `${SITE_BASE_URL}/assets/clinic-hero.png`;
@@ -864,6 +865,58 @@ function updateFooterCopyrightNotice() {
   }
 }
 
+function serialiseFormData(formData) {
+  return new URLSearchParams(Array.from(formData.entries())).toString();
+}
+
+function enableHomepageEnquiryFormSubmission() {
+  if (!(homepageEnquiryForm instanceof HTMLFormElement)) return;
+
+  const submitButton = homepageEnquiryForm.querySelector('button[type="submit"]');
+  if (!(submitButton instanceof HTMLButtonElement)) return;
+
+  const defaultButtonLabel = submitButton.textContent?.trim() || "Send enquiry";
+
+  const resetButtonLabel = () => {
+    submitButton.disabled = false;
+    submitButton.textContent = defaultButtonLabel;
+  };
+
+  homepageEnquiryForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
+
+    try {
+      const formData = new FormData(homepageEnquiryForm);
+      const response = await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: serialiseFormData(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Form submission failed with status ${response.status}`);
+      }
+
+      homepageEnquiryForm.reset();
+      submitButton.textContent = "Form sent";
+    } catch {
+      submitButton.textContent = "Try again";
+      window.setTimeout(resetButtonLabel, 2500);
+    }
+  });
+
+  homepageEnquiryForm.addEventListener("input", () => {
+    if (submitButton.textContent === "Form sent") {
+      resetButtonLabel();
+    }
+  });
+}
+
 buildBloodTestsMenu();
 ensureBlogNavLink();
 ensureBookingNavLink();
@@ -876,6 +929,7 @@ ensureSeoMetadata();
 localiseExistingInternalLinks();
 createCookieConsentUi();
 updateFooterCopyrightNotice();
+enableHomepageEnquiryFormSubmission();
 
 bloodTestsToggle?.addEventListener("click", (event) => {
   event.stopPropagation();
