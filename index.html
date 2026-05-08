@@ -574,11 +574,19 @@
               </details>
             </div>
 
-            <form class="booking-form faq-form" aria-label="Send an enquiry to AIO Medicals">
+            <form class="booking-form faq-form" name="homepage-enquiry" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field" aria-label="Send an enquiry to AIO Medicals">
               <p class="eyebrow">Send an enquiry</p>
               <h3>Ask a quick question.</h3>
-              <p class="faq-form-copy">Use this form if you want help choosing a test or booking the right appointment. When you submit, your email app will open with your message ready to send.</p>
+              <p class="faq-form-copy">Use this form if you want help choosing a test or booking the right appointment. Your enquiry will be sent through the website and land in the clinic inbox.</p>
+              <input type="hidden" name="form-name" value="homepage-enquiry">
               <input type="hidden" name="subject" value="Website enquiry from AIO Medicals homepage">
+
+              <p class="form-hidden-field" hidden>
+                <label>
+                  Do not fill this in
+                  <input type="text" name="bot-field" tabindex="-1" autocomplete="off">
+                </label>
+              </p>
 
               <label>
                 Your name
@@ -616,7 +624,7 @@
               </label>
 
               <button class="button primary form-button" type="submit">Send enquiry</button>
-              <p class="form-note">Your message will be addressed to AIO Medicals at info@aio-medicals.com and routed via the website form email setup.</p>
+              <p class="form-note">This form submits securely through the website. Public contact details still show info@aio-medicals.com.</p>
             </form>
           </div>
         </div>

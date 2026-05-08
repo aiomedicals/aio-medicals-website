@@ -2,7 +2,6 @@ const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector(".site-nav");
 const filterButtons = document.querySelectorAll(".filter-button");
 const serviceCards = document.querySelectorAll(".service-card");
-const bookingForm = document.querySelector("form.booking-form");
 const bloodTestsMenu = document.querySelector(".blood-tests-menu");
 const bloodTestsToggle = document.querySelector(".nav-dropdown-toggle");
 const bloodTestsPanel = document.querySelector(".blood-tests-panel");
@@ -12,7 +11,6 @@ const DEFAULT_SOCIAL_IMAGE = `${SITE_BASE_URL}/assets/clinic-hero.png`;
 const MAIN_BOOKING_URL = "https://calendly.com/aiomedicals";
 const CLINIC_PHONE = "+447825563775";
 const CLINIC_EMAIL = "info@aio-medicals.com";
-const FORM_SUBMISSION_EMAIL = "aiomedicals@gmail.com";
 const COOKIE_CONSENT_STORAGE_KEY = "aioCookieConsent";
 const COOKIE_CONSENT_VALUES = {
   ACCEPT_ALL: "accept-all",
@@ -591,37 +589,6 @@ function enhanceTestPageNextSteps() {
   `;
 }
 
-function formatFormFieldLabel(name = "") {
-  return name
-    .replace(/[\[\]_]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .replace(/\b\w/g, (character) => character.toUpperCase());
-}
-
-function buildFormMailtoLink(form) {
-  const formData = new FormData(form);
-  const subjectValue = formData.get("subject");
-  const subject = typeof subjectValue === "string" && subjectValue.trim()
-    ? subjectValue.trim()
-    : "Website enquiry";
-  const bodyLines = [];
-
-  formData.forEach((value, key) => {
-    if (key === "subject") return;
-    const normalisedValue = String(value).trim();
-    if (!normalisedValue) return;
-    bodyLines.push(`${formatFormFieldLabel(key)}: ${normalisedValue}`);
-  });
-
-  const queryParts = [`subject=${encodeURIComponent(subject)}`];
-  if (bodyLines.length) {
-    queryParts.push(`body=${encodeURIComponent(bodyLines.join("\n"))}`);
-  }
-
-  return `mailto:${FORM_SUBMISSION_EMAIL}?${queryParts.join("&")}`;
-}
-
 function enhanceTestPageHeroActions() {
   const testPage = document.querySelector(".test-page");
   const heroActions = document.querySelector(".test-hero .hero-actions");
@@ -981,25 +948,3 @@ filterButtons.forEach((button) => {
     });
   });
 });
-
-if (bookingForm instanceof HTMLFormElement) {
-  bookingForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const button = bookingForm.querySelector("button");
-    if (button instanceof HTMLButtonElement) {
-      const originalLabel = button.dataset.defaultLabel || button.textContent || "Submit";
-      button.dataset.defaultLabel = originalLabel;
-      button.textContent = "Opening email";
-      button.disabled = true;
-    }
-
-    window.location.href = buildFormMailtoLink(bookingForm);
-
-    if (button instanceof HTMLButtonElement) {
-      window.setTimeout(() => {
-        button.textContent = button.dataset.defaultLabel || "Submit";
-        button.disabled = false;
-      }, 2600);
-    }
-  });
-}
