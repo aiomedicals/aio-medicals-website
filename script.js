@@ -11,7 +11,7 @@ const SITE_BASE_URL = "https://www.aio-medicals.com";
 const DEFAULT_SOCIAL_IMAGE = `${SITE_BASE_URL}/assets/clinic-hero.png`;
 const MAIN_BOOKING_URL = "https://calendly.com/aiomedicals";
 const CLINIC_PHONE = "+447825563775";
-const CLINIC_EMAIL = "hello@aio-medicals.com";
+const CLINIC_EMAIL = "aiomedicals@gmail.com";
 const COOKIE_CONSENT_STORAGE_KEY = "aioCookieConsent";
 const COOKIE_CONSENT_VALUES = {
   ACCEPT_ALL: "accept-all",
@@ -585,7 +585,7 @@ function enhanceTestPageNextSteps() {
   ctaPanel.innerHTML = `
     <a class="button primary" href="https://calendly.com/aiomedicals" target="_blank" rel="noreferrer">Book an appointment</a>
     <a class="button secondary" href="https://calendly.com/aiomedicals/30min?back=1&month=2026-05" target="_blank" rel="noreferrer">Book an on-line consultation</a>
-    <a class="button secondary" href="mailto:hello@aio-medicals.com?subject=${emailSubject}">Email</a>
+    <a class="button secondary" href="mailto:aiomedicals@gmail.com?subject=${emailSubject}">Email</a>
     <a class="button secondary" href="tel:+447825563775">Call</a>
   `;
 }
