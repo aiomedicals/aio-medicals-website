@@ -3,20 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="AiO-Medicals-Favicaon.png">
     <title>AIO Medicals | Private Blood Tests</title>
     <meta
       name="description"
       content="AIO Medicals provides private blood tests, phlebotomy appointments, health screening panels and clear results support."
     >
     <meta name="google-site-verification" content="cYkNI8uw1doD66BaNhmnX_h2snuaajV14wIgVm2J48Q">
-    <link rel="preload" href="assets/clinic-hero.png" as="image">
+    <link
+      rel="preload"
+      as="image"
+      href="assets/responsive/clinic-hero-1280.jpg"
+      type="image/jpeg"
+      imagesrcset="assets/responsive/clinic-hero-768.jpg 768w, assets/responsive/clinic-hero-1280.jpg 1280w"
+      imagesizes="100vw"
+    >
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="AIO Medicals home">
         <span class="brand-mark" aria-hidden="true">
-          <img src="assets/aio-medicals-logo.png" alt="">
+          <picture>
+            <source
+              srcset="assets/responsive/aio-medicals-logo-320.avif"
+              type="image/avif"
+            >
+            <img
+              src="assets/responsive/aio-medicals-logo-320.png"
+              alt=""
+              width="320"
+              height="44"
+              decoding="async"
+            >
+          </picture>
         </span>
         <span class="brand-tagline">Private blood testing clinic</span>
       </a>
@@ -44,7 +64,19 @@
 
     <main id="top">
       <section class="hero">
-        <img class="hero-image" src="assets/clinic-hero.png" alt="Clinician preparing blood sample tubes in a clean private clinic room">
+        <picture class="hero-image-wrap">
+          <img
+            class="hero-image"
+            src="assets/responsive/clinic-hero-1280.jpg"
+            srcset="assets/responsive/clinic-hero-768.jpg 768w, assets/responsive/clinic-hero-1280.jpg 1280w"
+            sizes="100vw"
+            alt="Clinician preparing blood sample tubes in a clean private clinic room"
+            width="1280"
+            height="675"
+            fetchpriority="high"
+            decoding="async"
+          >
+        </picture>
         <div class="hero-scrim" aria-hidden="true"></div>
         <div class="hero-content">
           <p class="eyebrow">Private blood testing with clinical care</p>
@@ -96,7 +128,23 @@
         <div class="section-inner barry-grid">
           <div class="barry-card" aria-label="Barry Logan profile">
             <figure class="barry-photo-card">
-              <img src="Barry new photo.png" alt="Barry Logan, founder of AIO Medicals, in blue medical scrubs in a clinical room">
+              <picture>
+                <source
+                  srcset="assets/responsive/barry-logan-640.avif 640w, assets/responsive/barry-logan-960.avif 960w"
+                  sizes="(min-width: 980px) 40vw, 100vw"
+                  type="image/avif"
+                >
+                <img
+                  src="assets/responsive/barry-logan-640.jpg"
+                  srcset="assets/responsive/barry-logan-640.jpg 640w, assets/responsive/barry-logan-960.jpg 960w"
+                  sizes="(min-width: 980px) 40vw, 100vw"
+                  alt="Barry Logan, founder of AIO Medicals, in blue medical scrubs in a clinical room"
+                  width="960"
+                  height="1064"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
             </figure>
             <div class="barry-card-copy">
               <p class="eyebrow">Founder-led care</p>
@@ -266,7 +314,23 @@
             </div>
           </div>
           <div class="performance-media">
-            <img src="assets/sean-willers/sean-willers-intro.png" alt="Willers Coaching social media post">
+            <picture>
+              <source
+                srcset="assets/responsive/sean-willers/sean-willers-intro-420.avif 420w, assets/responsive/sean-willers/sean-willers-intro-840.avif 840w"
+                sizes="(min-width: 980px) 24rem, 50vw"
+                type="image/avif"
+              >
+              <img
+                src="assets/responsive/sean-willers/sean-willers-intro-420.jpg"
+                srcset="assets/responsive/sean-willers/sean-willers-intro-420.jpg 420w, assets/responsive/sean-willers/sean-willers-intro-840.jpg 840w"
+                sizes="(min-width: 980px) 24rem, 50vw"
+                alt="Willers Coaching social media post"
+                width="840"
+                height="982"
+                loading="lazy"
+                decoding="async"
+              >
+            </picture>
             <div>
               <strong>@sean_willerscoaching</strong>
               <span>Fitness, mindset, alcohol-free momentum and accountability through Willers Coaching.</span>
@@ -286,7 +350,7 @@
           <div class="blog-preview-grid">
             <article class="blog-card">
               <div class="blog-card-media">
-                <img src="assets/test-page-images/test-tube-on-a-silver-table.png" alt="Private clinic blood test setup for wellness screening">
+                <img src="assets/test-page-images/test-tube-on-a-silver-table.png" alt="Private clinic blood test setup for wellness screening" loading="lazy" decoding="async">
               </div>
               <div class="blog-card-body">
                 <p class="eyebrow">Mayfield & Tunbridge Wells</p>
@@ -303,7 +367,24 @@
 
             <article class="blog-card">
               <div class="blog-card-media">
-                <img class="focus-face-high" src="assets/sean-willers/sean-willers-intro.png" alt="Sports performance coaching image for blood testing article">
+                <picture>
+                  <source
+                    srcset="assets/responsive/sean-willers/sean-willers-intro-420.avif 420w, assets/responsive/sean-willers/sean-willers-intro-840.avif 840w"
+                    sizes="(min-width: 1100px) 22rem, (min-width: 700px) 45vw, 100vw"
+                    type="image/avif"
+                  >
+                  <img
+                    class="focus-face-high"
+                    src="assets/responsive/sean-willers/sean-willers-intro-420.jpg"
+                    srcset="assets/responsive/sean-willers/sean-willers-intro-420.jpg 420w, assets/responsive/sean-willers/sean-willers-intro-840.jpg 840w"
+                    sizes="(min-width: 1100px) 22rem, (min-width: 700px) 45vw, 100vw"
+                    alt="Sports performance coaching image for blood testing article"
+                    width="840"
+                    height="982"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </picture>
               </div>
               <div class="blog-card-body">
                 <p class="eyebrow">Performance guide</p>
@@ -320,7 +401,24 @@
 
             <article class="blog-card">
               <div class="blog-card-media">
-                <img class="focus-face-mid" src="Barry new photo.png" alt="Barry Logan in blue medical scrubs for men's health blood testing article">
+                <picture>
+                  <source
+                    srcset="assets/responsive/barry-logan-640.avif 640w, assets/responsive/barry-logan-960.avif 960w"
+                    sizes="(min-width: 1100px) 22rem, (min-width: 700px) 45vw, 100vw"
+                    type="image/avif"
+                  >
+                  <img
+                    class="focus-face-mid"
+                    src="assets/responsive/barry-logan-640.jpg"
+                    srcset="assets/responsive/barry-logan-640.jpg 640w, assets/responsive/barry-logan-960.jpg 960w"
+                    sizes="(min-width: 1100px) 22rem, (min-width: 700px) 45vw, 100vw"
+                    alt="Barry Logan in blue medical scrubs for men's health blood testing article"
+                    width="960"
+                    height="1064"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </picture>
               </div>
               <div class="blog-card-body">
                 <p class="eyebrow">Men's health guide</p>
@@ -481,7 +579,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img src="assets/aio-medicals-logo-white.png" alt="AIO Medicals">
+          <img src="assets/aio-medicals-logo-white.png" alt="AIO Medicals" loading="lazy" decoding="async">
           <p>Private blood tests, health screens and professional phlebotomy appointments in Royal Tunbridge Wells and Mayfield.</p>
           <div class="footer-contact">
             <a href="tel:+447825563775">07825 563775</a>

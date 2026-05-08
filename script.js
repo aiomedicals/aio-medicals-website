@@ -12,6 +12,11 @@ const DEFAULT_SOCIAL_IMAGE = `${SITE_BASE_URL}/assets/clinic-hero.png`;
 const MAIN_BOOKING_URL = "https://calendly.com/aiomedicals";
 const CLINIC_PHONE = "+447825563775";
 const CLINIC_EMAIL = "hello@aio-medicals.com";
+const COOKIE_CONSENT_STORAGE_KEY = "aioCookieConsent";
+const COOKIE_CONSENT_VALUES = {
+  ACCEPT_ALL: "accept-all",
+  ESSENTIAL_ONLY: "essential-only",
+};
 const BLOG_ARTICLES = {
   "private-blood-testing-tunbridge-wells": {
     title: "Private blood testing in Tunbridge Wells",
@@ -109,6 +114,10 @@ const testPriceGuide = {
   "weight-loss-blood-test": "99.00",
 };
 
+function isLocalFilePreview() {
+  return window.location.protocol === "file:";
+}
+
 function stripHtmlExtension(path = "") {
   if (!path) return path;
   if (path.endsWith("/index.html")) {
@@ -120,6 +129,26 @@ function stripHtmlExtension(path = "") {
 
 function toPrettyInternalUrl(path = "") {
   if (!path) return path;
+  if (isLocalFilePreview()) {
+    if (path === "index.html") return "index.html";
+    if (path.startsWith("index.html#")) return path;
+    if (path === "tests/index.html") return "tests/index.html";
+    if (path.startsWith("tests/index.html#")) return path;
+    if (path === "blog/index.html") return "blog/index.html";
+    if (path.startsWith("blog/index.html#")) return path;
+    if (/\.html(?=($|#|\?))/.test(path)) return path;
+
+    const [pathWithoutHash, hash = ""] = path.split("#");
+    const [pathname, query = ""] = pathWithoutHash.split("?");
+    const suffix = `${query ? `?${query}` : ""}${hash ? `#${hash}` : ""}`;
+
+    if (pathname.endsWith("/")) {
+      return `${pathname}index.html${suffix}`;
+    }
+
+    return `${pathname}.html${suffix}`;
+  }
+
   if (path === "index.html") return "./";
   if (path.startsWith("index.html#")) return `./${path.slice("index.html".length)}`;
   if (path === "tests/index.html") return "tests/";
@@ -132,14 +161,51 @@ function toPrettyInternalUrl(path = "") {
 function getCanonicalPath() {
   const path = window.location.pathname || "/";
 
-  if (window.location.protocol === "file:") {
-    const workspacePath = "/AiO-Medicals-Site-Master";
+  if (isLocalFilePreview()) {
+    const workspacePath = "/AIO-Medicals-Website-Main";
     const workspaceIndex = path.indexOf(workspacePath);
     const relativePath = workspaceIndex >= 0 ? path.slice(workspaceIndex + workspacePath.length) : path;
     return relativePath || "/";
   }
 
   return path;
+}
+
+function convertHrefForLocalFilePreview(href = "") {
+  if (!href) return href;
+  if (/^(?:[a-z]+:|\/\/)/i.test(href)) return href;
+  if (href.startsWith("#")) return href;
+
+  const [pathWithoutHash, hash = ""] = href.split("#");
+  const [pathname, query = ""] = pathWithoutHash.split("?");
+
+  if (!pathname) return href;
+
+  let nextPath = pathname;
+
+  if (pathname.endsWith("/")) {
+    nextPath = `${pathname}index.html`;
+  } else if (/\/(?:index)$/.test(pathname) || pathname === "index" || pathname === "." || pathname === "..") {
+    nextPath = `${pathname}.html`;
+  } else if (!/\.[a-z0-9]+$/i.test(pathname)) {
+    nextPath = `${pathname}.html`;
+  }
+
+  return `${nextPath}${query ? `?${query}` : ""}${hash ? `#${hash}` : ""}`;
+}
+
+function localiseExistingInternalLinks() {
+  if (!isLocalFilePreview()) return;
+
+  document.querySelectorAll("a[href]").forEach((link) => {
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    const localHref = convertHrefForLocalFilePreview(href);
+    if (localHref !== href) {
+      link.setAttribute("href", localHref);
+    }
+  });
 }
 
 function getPublicUrl(path = getCanonicalPath()) {
@@ -605,6 +671,119 @@ function ensureBookingNavLink() {
   ctaLink.rel = "noreferrer";
 }
 
+function getStoredCookieConsent() {
+  try {
+    const storedValue = window.localStorage.getItem(COOKIE_CONSENT_STORAGE_KEY);
+    if (!storedValue) return "";
+
+    const parsedValue = JSON.parse(storedValue);
+    const consentValue = parsedValue?.value;
+
+    if (Object.values(COOKIE_CONSENT_VALUES).includes(consentValue)) {
+      return consentValue;
+    }
+
+    return "";
+  } catch {
+    return "";
+  }
+}
+
+function storeCookieConsent(value) {
+  try {
+    window.localStorage.setItem(
+      COOKIE_CONSENT_STORAGE_KEY,
+      JSON.stringify({ value, savedAt: new Date().toISOString() }),
+    );
+  } catch {
+    // Ignore storage failures and keep the banner available.
+  }
+}
+
+function createCookieConsentUi() {
+  if (document.querySelector(".cookie-banner")) return;
+
+  const banner = document.createElement("aside");
+  banner.className = "cookie-banner";
+  banner.setAttribute("role", "dialog");
+  banner.setAttribute("aria-modal", "false");
+  banner.setAttribute("aria-labelledby", "cookie-banner-title");
+  banner.setAttribute("aria-describedby", "cookie-banner-copy cookie-banner-status");
+
+  banner.innerHTML = `
+    <p id="cookie-banner-title" class="cookie-banner-title">Cookie preferences</p>
+    <p id="cookie-banner-copy" class="cookie-banner-copy">
+      We use essential cookies and similar storage to keep this website working and to remember your privacy choices.
+      We do not load non-essential cookies before you choose. External services such as Calendly may set their own
+      cookies if you choose to visit them.
+    </p>
+    <p id="cookie-banner-status" class="cookie-banner-status" aria-live="polite"></p>
+    <div class="cookie-banner-actions">
+      <button type="button" class="cookie-banner-button cookie-banner-button-primary" data-cookie-choice="accept-all">Accept all</button>
+      <button type="button" class="cookie-banner-button cookie-banner-button-secondary" data-cookie-choice="essential-only">Essential only</button>
+    </div>
+  `;
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "cookie-settings-trigger";
+  trigger.textContent = "Cookie settings";
+  trigger.hidden = true;
+
+  const status = banner.querySelector(".cookie-banner-status");
+
+  const setBannerStatus = (value) => {
+    if (!(status instanceof HTMLElement)) return;
+
+    if (value === COOKIE_CONSENT_VALUES.ACCEPT_ALL) {
+      status.textContent = "Current setting: all cookies accepted.";
+      return;
+    }
+
+    if (value === COOKIE_CONSENT_VALUES.ESSENTIAL_ONLY) {
+      status.textContent = "Current setting: essential cookies only.";
+      return;
+    }
+
+    status.textContent = "Choose whether to allow non-essential cookies.";
+  };
+
+  const openBanner = () => {
+    const storedConsent = getStoredCookieConsent();
+    setBannerStatus(storedConsent);
+    banner.classList.add("is-visible");
+    trigger.hidden = true;
+  };
+
+  const closeBanner = () => {
+    banner.classList.remove("is-visible");
+    trigger.hidden = true;
+  };
+
+  banner.addEventListener("click", (event) => {
+    if (!(event.target instanceof HTMLElement)) return;
+
+    const choice = event.target.dataset.cookieChoice;
+    if (!choice || !Object.values(COOKIE_CONSENT_VALUES).includes(choice)) return;
+
+    storeCookieConsent(choice);
+    setBannerStatus(choice);
+    closeBanner();
+  });
+
+  trigger.addEventListener("click", openBanner);
+
+  document.body.append(banner, trigger);
+
+  if (getStoredCookieConsent()) {
+    setBannerStatus(getStoredCookieConsent());
+    trigger.hidden = true;
+    return;
+  }
+
+  openBanner();
+}
+
 function buildBloodTestsMenu() {
   const catalogue = window.AIO_TEST_CATALOGUE;
   if (!bloodTestsPanel || !Array.isArray(catalogue) || !catalogue.length) return;
@@ -686,6 +865,8 @@ enhanceTestPageNextSteps();
 enhanceTestPageHeroActions();
 enhanceTestPagesWithRelatedGuides();
 ensureSeoMetadata();
+localiseExistingInternalLinks();
+createCookieConsentUi();
 
 bloodTestsToggle?.addEventListener("click", (event) => {
   event.stopPropagation();
