@@ -7,7 +7,7 @@ const bloodTestsToggle = document.querySelector(".nav-dropdown-toggle");
 const bloodTestsPanel = document.querySelector(".blood-tests-panel");
 const homepageEnquiryForm = document.querySelector('form[name="homepage-enquiry"]');
 const desktopMegaMenuQuery = window.matchMedia("(min-width: 921px) and (hover: hover) and (pointer: fine)");
-const SITE_BASE_URL = "https://www.aio-medicals.com";
+const SITE_BASE_URL = "https://aio-medicals.com";
 const DEFAULT_SOCIAL_IMAGE = `${SITE_BASE_URL}/assets/clinic-hero.png`;
 const MAIN_BOOKING_URL = "https://calendly.com/aiomedicals";
 const CLINIC_PHONE = "+447825563775";
@@ -865,6 +865,103 @@ function updateFooterCopyrightNotice() {
   }
 }
 
+function getFooterPartnerLogoUrl() {
+  const scriptSource = document.querySelector('script[src$="script.js"]')?.getAttribute("src");
+
+  if (scriptSource) {
+    return new URL("good-body-logo.png", new URL(scriptSource, document.baseURI)).toString();
+  }
+
+  return normaliseSiteUrl("good-body-logo.png");
+}
+
+function applyWhiteTransparentLogoTreatment(image) {
+  if (!(image instanceof HTMLImageElement) || image.dataset.logoProcessed === "true") return;
+
+  const source = image.currentSrc || image.src;
+  if (!source) return;
+
+  const rawImage = new Image();
+  rawImage.decoding = "async";
+
+  rawImage.addEventListener("load", () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = rawImage.naturalWidth;
+    canvas.height = rawImage.naturalHeight;
+
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    if (!context) return;
+
+    context.drawImage(rawImage, 0, 0);
+
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    const { data } = imageData;
+
+    for (let index = 0; index < data.length; index += 4) {
+      const red = data[index];
+      const green = data[index + 1];
+      const blue = data[index + 2];
+      const alpha = data[index + 3];
+
+      if (alpha === 0) continue;
+
+      const average = (red + green + blue) / 3;
+      if (average >= 246) {
+        data[index + 3] = 0;
+        continue;
+      }
+
+      const opacityScale = Math.max(0.22, Math.pow((255 - average) / 255, 0.7));
+
+      data[index] = 255;
+      data[index + 1] = 255;
+      data[index + 2] = 255;
+      data[index + 3] = Math.round(alpha * opacityScale);
+    }
+
+    context.putImageData(imageData, 0, 0);
+    image.src = canvas.toDataURL("image/png");
+    image.dataset.logoProcessed = "true";
+  }, { once: true });
+
+  rawImage.src = source;
+}
+
+function ensureFooterPartnershipLogo() {
+  const footerBrand = document.querySelector(".footer-brand");
+  if (!footerBrand || footerBrand.querySelector(".footer-partnership")) return;
+
+  const footerDescription = footerBrand.querySelector("p");
+  const footerContact = footerBrand.querySelector(".footer-contact");
+  const partnershipMarkup = `
+    <div class="footer-partnership" aria-label="AIO Medicals in partnership with Goodbody">
+      <span class="footer-partnership-label">In partnership with</span>
+      <img
+        class="footer-partnership-logo"
+        src="${getFooterPartnerLogoUrl()}"
+        alt="Goodbody"
+        loading="lazy"
+        decoding="async"
+      >
+    </div>
+  `;
+
+  if (footerDescription) {
+    footerDescription.insertAdjacentHTML("beforebegin", partnershipMarkup);
+    applyWhiteTransparentLogoTreatment(footerBrand.querySelector(".footer-partnership-logo"));
+    return;
+  }
+
+  if (footerContact) {
+    footerContact.insertAdjacentHTML("beforebegin", partnershipMarkup);
+    applyWhiteTransparentLogoTreatment(footerBrand.querySelector(".footer-partnership-logo"));
+    return;
+  }
+
+  footerBrand.insertAdjacentHTML("beforeend", partnershipMarkup);
+  applyWhiteTransparentLogoTreatment(footerBrand.querySelector(".footer-partnership-logo"));
+}
+
 function serialiseFormData(formData) {
   return new URLSearchParams(Array.from(formData.entries())).toString();
 }
@@ -929,6 +1026,7 @@ ensureSeoMetadata();
 localiseExistingInternalLinks();
 createCookieConsentUi();
 updateFooterCopyrightNotice();
+ensureFooterPartnershipLogo();
 enableHomepageEnquiryFormSubmission();
 
 bloodTestsToggle?.addEventListener("click", (event) => {

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aio-medicals.com/sitemap.xml
