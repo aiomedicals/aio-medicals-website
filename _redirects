@@ -1,16 +1,23 @@
 # www to non-www
 https://www.aio-medicals.com/* https://aio-medicals.com/:splat 301!
 
-# Serve directory index pages directly (must come first to prevent loops)
+# Serve directory index pages as-is (internal rewrites, no redirects)
 /tests/ /tests/index.html 200
 /blog/ /blog/index.html 200
+/thank-you/ /thank-you/index.html 200
 
-# Canonical redirects: strip .html and add trailing slash to directories
-/index.html / 301!
-/blog /blog/ 301
-/blog/index.html /blog/ 301!
+# Redirect to trailing slash for directories (for non-slash access)
 /tests /tests/ 301
+/blog /blog/ 301
+/thank-you /thank-you/ 301
+
+# Explicit index.html redirects to parent directory with trailing slash
 /tests/index.html /tests/ 301!
+/blog/index.html /blog/ 301!
+/thank-you/index.html /thank-you/ 301!
+/index.html / 301!
+
+# Redirect [slug].html to /[slug] (remove extension)
 /blog/*.html /blog/:splat 301!
 /tests/*.html /tests/:splat 301!
 /*.html /:splat 301!
