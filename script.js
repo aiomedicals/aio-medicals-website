@@ -171,6 +171,18 @@ function getCanonicalPath() {
   return path;
 }
 
+function getLocalWorkspaceRootUrl() {
+  const scriptSource = document.querySelector('script[src$="script.js"]')?.getAttribute("src");
+
+  if (!scriptSource) return null;
+
+  try {
+    return new URL(".", new URL(scriptSource, document.baseURI));
+  } catch {
+    return null;
+  }
+}
+
 function convertHrefForLocalFilePreview(href = "") {
   if (!href) return href;
   if (/^(?:[a-z]+:|\/\/)/i.test(href)) return href;
@@ -182,16 +194,28 @@ function convertHrefForLocalFilePreview(href = "") {
   if (!pathname) return href;
 
   let nextPath = pathname;
+  const workspaceRootUrl = getLocalWorkspaceRootUrl();
+  const isRootRelative = pathname.startsWith("/");
 
-  if (pathname.endsWith("/")) {
-    nextPath = `${pathname}index.html`;
-  } else if (/\/(?:index)$/.test(pathname) || pathname === "index" || pathname === "." || pathname === "..") {
-    nextPath = `${pathname}.html`;
-  } else if (!/\.[a-z0-9]+$/i.test(pathname)) {
-    nextPath = `${pathname}.html`;
+  if (isRootRelative) {
+    nextPath = pathname.slice(1);
   }
 
-  return `${nextPath}${query ? `?${query}` : ""}${hash ? `#${hash}` : ""}`;
+  if (nextPath.endsWith("/")) {
+    nextPath = `${nextPath}index.html`;
+  } else if (/\/(?:index)$/.test(nextPath) || nextPath === "index" || nextPath === "." || nextPath === "..") {
+    nextPath = `${nextPath}.html`;
+  } else if (!/\.[a-z0-9]+$/i.test(nextPath)) {
+    nextPath = `${nextPath}.html`;
+  }
+
+  const suffix = `${query ? `?${query}` : ""}${hash ? `#${hash}` : ""}`;
+
+  if (isRootRelative && workspaceRootUrl) {
+    return new URL(`${nextPath}${suffix}`, workspaceRootUrl).toString();
+  }
+
+  return `${nextPath}${suffix}`;
 }
 
 function localiseExistingInternalLinks() {
@@ -787,6 +811,7 @@ function createCookieConsentUi() {
 function buildBloodTestsMenu() {
   const catalogue = window.AIO_TEST_CATALOGUE;
   if (!bloodTestsPanel || !Array.isArray(catalogue) || !catalogue.length) return;
+  if (bloodTestsPanel.querySelector(".blood-tests-categories")) return;
 
   bloodTestsPanel.innerHTML = `
     <div class="blood-tests-menu-heading">
@@ -1031,6 +1056,7 @@ enableHomepageEnquiryFormSubmission();
 
 bloodTestsToggle?.addEventListener("click", (event) => {
   event.stopPropagation();
+  event.preventDefault();
   const isOpen = bloodTestsMenu?.classList.contains("is-open");
   if (isOpen) {
     closeBloodTestsMenu();

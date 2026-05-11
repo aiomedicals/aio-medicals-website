@@ -229,6 +229,7 @@ img {
 }
 
 .site-nav a,
+.nav-dropdown-link,
 .nav-dropdown-toggle {
   background: transparent;
   border: 0;
@@ -242,7 +243,9 @@ img {
 }
 
 .site-nav a:hover,
+.nav-dropdown-link:hover,
 .nav-dropdown-toggle:hover,
+.blood-tests-menu.is-open .nav-dropdown-link,
 .blood-tests-menu.is-open .nav-dropdown-toggle {
   background: #f3f6f7;
   color: var(--ink);
@@ -256,6 +259,23 @@ img {
 
 .nav-dropdown {
   position: relative;
+}
+
+.nav-dropdown-trigger {
+  align-items: center;
+  display: inline-flex;
+  gap: 4px;
+}
+
+.nav-dropdown-link {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.nav-dropdown-link:focus-visible,
+.nav-dropdown-toggle:focus-visible {
+  outline: 2px solid rgba(16, 35, 49, 0.32);
+  outline-offset: 2px;
 }
 
 .nav-dropdown::after {
@@ -277,8 +297,12 @@ img {
   content: "⌄";
   display: inline-block;
   font-size: 0.78em;
-  margin-left: 7px;
   transform: translateY(-1px);
+}
+
+.nav-dropdown-toggle {
+  min-width: 40px;
+  padding-inline: 12px;
 }
 
 .blood-tests-panel {
@@ -1880,7 +1904,7 @@ details p {
 .footer-columns {
   display: grid;
   gap: clamp(20px, 4vw, 42px);
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .footer-columns nav,
@@ -4534,9 +4558,26 @@ details p {
   }
 
   .site-nav a,
+  .nav-dropdown-link,
   .nav-dropdown-toggle {
     border-radius: var(--radius);
     padding: 14px;
+  }
+
+  .nav-dropdown-trigger {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .nav-dropdown-link {
+    align-items: center;
+    min-width: 0;
+  }
+
+  .nav-dropdown-toggle {
+    min-width: 52px;
+    padding-inline: 14px;
   }
 
   .nav-dropdown {
@@ -4984,7 +5025,8 @@ details p {
   }
 
   .footer-columns {
-    display: none;
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .footer-contact a {
